@@ -6,7 +6,27 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   before_action :check_enabled_registrations, only: [:new, :create]
   before_action :configure_sign_up_params, only: [:create]
 
+  def update
+    if current_user.initial_password_usage
+      send_reset_password_instructions
+    else
+      super
+    end
+  end
+  
+
   protected
+
+  def send_reset_password_instructions
+    _resource = resource_class.send_reset_password_instructions(email: current_user.email)
+
+    if successfully_sent?(_resource)
+      sign_out :user
+      redirect_to edit_user_registration_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def build_resource(hash = nil)
     super(hash)

@@ -1,0 +1,16 @@
+- content_for :page_title do
+  = t('auth.oauth_registration')
+
+= simple_form_for(@oauth_registration, url: user_oauth_registration_path, method: 'POST') do |f|
+  = render 'shared/error_messages', object: f.object
+
+  .omniauth
+    = f.label :username
+    = f.input :username, autofocus: true, placeholder: t('simple_form.labels.defaults.username'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.username') }
+
+    = f.label :email
+    .label= t('auth.confirmed_email')
+    = f.input :email, disabled: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.email') }
+  
+  .actions
+    = f.button :button, t('auth.register'), type: :submit

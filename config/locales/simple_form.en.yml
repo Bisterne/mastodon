@@ -44,6 +44,12 @@ en:
         follow_request: Send e-mail when someone requests to follow you
         mention: Send e-mail when someone mentions you
         reblog: Send e-mail when someone boosts your status
+      omniauth:
+        or: or
+      omniauth_twitter:
+        register: Get started with Twitter
+        signin: Log in with Twitter
+        signup: Sign up with Twitter
     'no': 'No'
     required:
       mark: "*"

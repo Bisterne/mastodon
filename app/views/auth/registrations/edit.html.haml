@@ -4,10 +4,15 @@
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = render 'shared/error_messages', object: resource
 
-  = f.input :email, placeholder: t('simple_form.labels.defaults.email'), input_html: { 'aria-label' => t('simple_form.labels.defaults.email') }
-  = f.input :password, autocomplete: "off", placeholder: t('simple_form.labels.defaults.new_password'), input_html: { 'aria-label' => t('simple_form.labels.defaults.new_password') }
-  = f.input :password_confirmation, autocomplete: "off", placeholder: t('simple_form.labels.defaults.confirm_new_password'), input_html: { 'aria-label' => t('simple_form.labels.defaults.confirm_new_password') }
-  = f.input :current_password, autocomplete: "off", placeholder: t('simple_form.labels.defaults.current_password'), input_html: { 'aria-label' => t('simple_form.labels.defaults.current_password') }
+  - if f.object.initial_password_usage
+    %p.hint= t('auth.send_password_setting_url', email: f.object.email)
+    .actions
+      = f.button :button, t('auth.reset_password'), type: :submit
+  - else
+    = f.input :email, placeholder: t('simple_form.labels.defaults.email'), input_html: { 'aria-label' => t('simple_form.labels.defaults.email') }
+    = f.input :password, autocomplete: "off", placeholder: t('simple_form.labels.defaults.new_password'), input_html: { 'aria-label' => t('simple_form.labels.defaults.new_password') }
+    = f.input :password_confirmation, autocomplete: "off", placeholder: t('simple_form.labels.defaults.confirm_new_password'), input_html: { 'aria-label' => t('simple_form.labels.defaults.confirm_new_password') }
+    = f.input :current_password, autocomplete: "off", placeholder: t('simple_form.labels.defaults.current_password'), input_html: { 'aria-label' => t('simple_form.labels.defaults.current_password') }
 
-  .actions
-    = f.button :button, t('generic.save_changes'), type: :submit
+    .actions
+      = f.button :button, t('generic.save_changes'), type: :submit

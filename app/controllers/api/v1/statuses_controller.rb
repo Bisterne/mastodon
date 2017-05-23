@@ -67,6 +67,11 @@ class Api::V1::StatusesController < ApiController
                                          application: doorkeeper_token.application,
                                          idempotency: request.headers['Idempotency-Key'])
 
+    setting = ::Web::Setting.where(user: current_user).first_or_initialize(user: current_user).data
+    if status_params.dig(:tweet) || setting.dig('compose', 'tweet')
+      CrossPostWorker.perform_async(@status.id)
+    end
+
     render :show
   end
 
@@ -113,7 +118,7 @@ class Api::V1::StatusesController < ApiController
   end
 
   def status_params
-    params.permit(:status, :in_reply_to_id, :sensitive, :spoiler_text, :visibility, media_ids: [])
+    params.permit(:status, :in_reply_to_id, :sensitive, :spoiler_text, :visibility, :tweet, media_ids: [])
   end
 
   def pagination_params(core_params)

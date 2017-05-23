@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import Avatar from './avatar';
@@ -71,6 +72,22 @@ class Status extends React.PureComponent {
       }
     }
 
+    let oauthIcons = (<span />);
+    status.get('account').getIn(['oauth_authentications'], new Immutable.List()).forEach(oauth_authentication => {
+      const provider = oauth_authentication.get('provider');
+      const username = oauth_authentication.get('username');
+
+      if (provider === 'twitter') {
+        oauthIcons = (
+          <div className='status__oauth-authentications oauth-authentications'>
+            <a href={`https://twitter.com/${username}`} target='_blank' rel='noopener'>
+              <div className='oauth-authentication twitter' />
+            </a>
+          </div>
+        );
+      }
+    });
+
     return (
       <div className={this.props.muted ? 'status muted' : 'status'}>
         <div className='status__info'>
@@ -85,6 +102,8 @@ class Status extends React.PureComponent {
 
             <DisplayName account={status.get('account')} />
           </a>
+
+          {oauthIcons}
         </div>
 
         <StatusContent status={status} onClick={this.handleClick} />

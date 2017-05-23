@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425202925) do
+ActiveRecord::Schema.define(version: 20170426112132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,11 @@ ActiveRecord::Schema.define(version: 20170425202925) do
     t.datetime "data_updated_at"
   end
 
+  create_table "initial_password_usages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_initial_password_usages_on_user_id", unique: true, using: :btree
+  end
+
   create_table "media_attachments", force: :cascade do |t|
     t.bigint   "status_id"
     t.string   "file_file_name"
@@ -132,6 +137,7 @@ ActiveRecord::Schema.define(version: 20170425202925) do
     t.datetime "updated_at", null: false
     t.index ["account_id", "status_id"], name: "index_mentions_on_account_id_and_status_id", unique: true, using: :btree
     t.index ["status_id"], name: "index_mentions_on_status_id", using: :btree
+    t.index ["status_id"], name: "mentions_status_id_index", using: :btree
   end
 
   create_table "mutes", force: :cascade do |t|
@@ -190,6 +196,19 @@ ActiveRecord::Schema.define(version: 20170425202925) do
     t.boolean  "superapp",     default: false, null: false
     t.string   "website"
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+  end
+
+  create_table "oauth_authentications", force: :cascade do |t|
+    t.integer  "user_id",      null: false
+    t.string   "provider",     null: false
+    t.string   "uid",          null: false
+    t.string   "username",     null: false
+    t.string   "token",        null: false
+    t.string   "token_secret", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["provider", "uid"], name: "index_oauth_authentications_on_provider_and_uid", unique: true, using: :btree
+    t.index ["user_id", "provider"], name: "index_oauth_authentications_on_user_id_and_provider", unique: true, using: :btree
   end
 
   create_table "preview_cards", force: :cascade do |t|

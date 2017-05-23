@@ -1,0 +1,34 @@
+- content_for :page_title do
+  = t('settings.oauth_authentications')
+
+- if current_user.initial_password_usage
+  %p.hint= t('oauth_authentications.initial_password_usage_note_html', link: link_to(t('auth.set_new_password'), edit_user_registration_path))
+
+%p.hint
+  Twitterアカウントと連携済みのアカウントにはTwitterのプロフィールページへのリンクが設定されたアイコンが表示されます。
+
+%table.table
+  %thead
+    %tr
+      %th= OauthAuthentication.human_attribute_name(:provider)
+      %th= OauthAuthentication.human_attribute_name(:username)
+  %tbody
+    - Devise.omniauth_configs.keys.each do |provider|
+      - oauth_authentication = current_user.oauth_authentications.find { |record| record.provider == provider.to_s }
+
+      %tr
+        %td= provider
+        %td
+          - case provider
+          - when :twitter
+            - if oauth_authentication
+              = link_to oauth_authentication.username, "https://twitter.com/#{oauth_authentication.username}", { target: '_blank', rel: 'noopener' }
+            - else
+              = '-'
+        %td
+          - if current_user.initial_password_usage
+            / nothing to do
+          - elsif oauth_authentication
+            = link_to t('oauth_authentications.unlink'), settings_oauth_authentication_path(oauth_authentication), method: :delete, data: { confirm: t('oauth_authentications.confirm') }
+          - else
+            = link_to t('oauth_authentications.link'), public_send(:"user_#{provider}_omniauth_authorize_path",), class: 'omniauth-twitter'

@@ -1,5 +1,10 @@
 en:
   activerecord:
+    attributes:
+      oauth_authentication:
+        provider: Provider
+        uid: Twitter ID
+        username: Account Name
     errors:
       models:
         account:
@@ -10,3 +15,9 @@ en:
           attributes:
             reblog:
               taken: of status already exists
+        oauth_authentication:
+          attributes:
+            base:
+              enabled_two_factor_authentication: You can not link twitter becouse two-factor authentication is enabled.
+            uid:
+              taken: has already been taken

@@ -1,4 +1,11 @@
 = simple_form_for(new_user, url: user_registration_path) do |f|
+  .omniauth
+    = link_to '/auth/oauth/twitter', { :class => 'block-button omniauth-twitter' } do
+      %i.icon-twitter
+      = t 'simple_form.labels.omniauth_twitter.register'
+
+  .separate= t 'simple_form.labels.omniauth.or'
+
   = f.simple_fields_for :account do |account_fields|
     = account_fields.input :username,
       autofocus: true,

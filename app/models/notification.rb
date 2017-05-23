@@ -24,7 +24,8 @@ class Notification < ApplicationRecord
     favourite:      'Favourite',
   }.freeze
 
-  STATUS_INCLUDES = [:account, :stream_entry, :media_attachments, :tags, mentions: :account, reblog: [:stream_entry, :account, :media_attachments, :tags, mentions: :account]].freeze
+  STATUS_INCLUDES = [:stream_entry, :media_attachments, :tags, mentions: { account: :oauth_authentications },
+                     reblog: [:stream_entry, :media_attachments, :tags, account: :oauth_authentications, mentions: { account: :oauth_authentications }], account: :oauth_authentications].freeze
 
   scope :cache_ids, -> { select(:id, :updated_at, :activity_type, :activity_id) }
 

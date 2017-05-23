@@ -1,5 +1,10 @@
 ja:
   activerecord:
+    attributes:
+      oauth_authentication:
+        provider: プロバイダー
+        uid: Twitter ID
+        username: アカウント名
     errors:
       models:
         account:
@@ -10,3 +15,9 @@ ja:
           attributes:
             reblog:
               taken: のブーストはすでに存在します
+        oauth_authentication:
+          attributes:
+            base:
+              enabled_two_factor_authentication: 二段階認証が有効な場合はTwitterアカウント連携を利用できません。
+            uid:
+              taken: はすでに他のユーザーと連携済みです

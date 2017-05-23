@@ -195,7 +195,10 @@ ja:
     register: 登録する
     resend_confirmation: 確認メールを再送する
     reset_password: パスワードを再発行
-    set_new_password: 新しいパスワード
+    send_password_setting_url: 'パスワードの設定URLを登録されたメールアドレス (%{email}) に送る'
+    set_new_password: 新しいパスワードを設定
+    oauth_registration: 登録を続ける
+    confirmed_email: '(認証済み)'
   authorize_follow:
     error: 残念ながら、リモートアカウントにエラーが発生しました。
     follow: フォロー
@@ -271,8 +274,8 @@ ja:
         one: "新しい1件の通知 \U0001F418"
         other: "新しい%{count}件の通知 \U0001F418"
     favourite:
-      body: 'あなたのトゥートが %{name} さんにお気に入り登録されました:'
-      subject: "%{name} さんがあなたのトゥートをお気に入りに登録しました"
+      body: 'あなたのトゥートが %{name} さんにナイセン！されました:'
+      subject: "%{name} さんがあなたのトゥートをナイセン！しました"
     follow:
       body: "%{name} さんにフォローされています"
       subject: "%{name} さんにフォローされています"
@@ -285,6 +288,14 @@ ja:
     reblog:
       body: 'あなたのトゥートが %{name} さんにブーストされました:'
       subject: あなたのトゥートが %{name} さんにブーストされました
+  oauth_authentications:
+    link: 連携する
+    unlink: 解除する
+    confirm: 本当によろしいですか？
+    successfully_unlinked: 解除しました
+    successfully_linked: 連携しました
+    failed_linking: 連携できませんでした
+    initial_password_usage_note_html: Twitterアカウント連携を変更する場合は、先に%{link}を設定する必要があります。
   pagination:
     next: 次
     prev: 前
@@ -301,6 +312,7 @@ ja:
     export: データのエクスポート
     followers: 信頼済みのインスタンス
     import: データのインポート
+    oauth_authentications: Twitterアカウント連携
     preferences: ユーザー設定
     settings: 設定
     two_factor_authentication: 二段階認証

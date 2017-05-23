@@ -39,11 +39,17 @@ ja:
         must_be_following: フォローしていないユーザーからの通知をブロック
       notification_emails:
         digest: タイムラインからピックアップしてメールで通知する
-        favourite: お気に入りに登録された時にメールで通知する
+        favourite: ナイセン！された時にメールで通知する
         follow: フォローされた時にメールで通知する
         follow_request: フォローリクエストを受けた時にメールで通知する
         mention: 返信が来た時にメールで通知する
         reblog: トゥートがブーストされた時にメールで通知する
+      omniauth:
+        or: または
+      omniauth_twitter:
+        register: Twitterアカウントで参加する
+        signin: Twitterアカウントでログインする
+        signup: Twitterアカウントで登録する
     'no': いいえ
     required:
       mark: "*"

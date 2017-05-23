@@ -389,3 +389,41 @@
     color: $color1;
   }
 }
+
+.oauth-authentications {
+  z-index: 2;
+  position: relative;
+  margin: 10px 0;
+  text-align: center;
+
+  a {
+    display: inline-block;
+    vertical-align: top;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .oauth-authentication {
+    width: 100%;
+    height: 100%;
+    background-color: $color4;
+    background-repeat: no-repeat;
+    transition: background-color 100ms ease;
+
+    &:hover {
+      background-color: $color1;
+    }
+
+    &.twitter {
+      background-image: image-url('twitter_logo_small.png');
+      background-position: center;
+      background-size: 80% auto;
+    }
+
+    & + .account__header__oauth-authentication {
+      margin-left: 18px;
+    }
+  }
+}

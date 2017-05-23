@@ -2,6 +2,13 @@
   = t('auth.login')
 
 = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .omniauth
+    = link_to '/auth/oauth/twitter', { :class => 'block-button omniauth-twitter' } do
+      %i.icon-twitter
+      = t 'simple_form.labels.omniauth_twitter.signin'
+
+  .separate= t('simple_form.labels.omniauth.or')
+
   = f.input :email, autofocus: true, placeholder: t('simple_form.labels.defaults.email'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.email') }
   = f.input :password, placeholder: t('simple_form.labels.defaults.password'), required: true, input_html: { 'aria-label' => t('simple_form.labels.defaults.password') }
 

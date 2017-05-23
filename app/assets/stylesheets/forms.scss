@@ -14,6 +14,16 @@ code {
     margin-bottom: 15px;
   }
 
+  .omniauth {
+    .label {
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .label, label {
+      opacity: 0.7;
+    }
+  }
+
   span.hint {
     display: block;
     color: $color3;
@@ -129,6 +139,10 @@ code {
       border-bottom-color: $color4;
       background: rgba($color8, 0.1);
     }
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 
   .input.field_with_errors {
@@ -190,6 +204,50 @@ code {
       &:active, &:focus {
         background-color: darken($color6, 5%);
       }
+    }
+
+    &.omniauth-twitter {
+      margin-top: 20px;
+      height: 60px;
+      line-height: 40px;
+      text-transform: none;
+    }
+
+    .icon-twitter {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      background-size: 100% auto;
+      background-image: image-url('twitter_logo_small.png');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  .separate {
+    position: relative;
+    margin: 30px 0;
+    font-size: 20px;
+    text-align: center;
+    color: #9baec8;
+
+    &::before, &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      width: 36%;
+      height: 1px;
+      background-color: #fff;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
     }
   }
 
@@ -268,6 +326,10 @@ code {
     display: block;
     font-size: 14px;
   }
+}
+
+.hint a {
+  color: $color4;
 }
 
 .table-form {

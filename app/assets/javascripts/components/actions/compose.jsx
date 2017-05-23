@@ -1,6 +1,7 @@
 import api from '../api';
 
 import { updateTimeline } from './timelines';
+import { changeSetting, saveSettings } from './settings';
 
 import * as emojione from 'emojione';
 
@@ -82,6 +83,7 @@ export function submitCompose() {
       status,
       in_reply_to_id: getState().getIn(['compose', 'in_reply_to'], null),
       media_ids: getState().getIn(['compose', 'media_attachments']).map(item => item.get('id')),
+      tweet: getState().getIn(['settings', 'compose', 'tweet'], false),
       sensitive: getState().getIn(['compose', 'sensitive']),
       spoiler_text: getState().getIn(['compose', 'spoiler_text'], ''),
       visibility: getState().getIn(['compose', 'privacy'])
@@ -262,6 +264,13 @@ export function changeComposeSpoilerText(text) {
     text
   };
 };
+
+export function changeTweet(value) {
+  return (dispatch, getState) => {
+    dispatch(changeSetting(['compose', 'tweet'], value));
+    dispatch(saveSettings());
+  };
+}
 
 export function changeComposeVisibility(value) {
   return {
